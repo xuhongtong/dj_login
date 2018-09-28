@@ -1,0 +1,45 @@
+{% load staticfiles %}   <!--加载静态方法-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+      <!--设置字符集、浏览器优先渲染模式以及可视区域设置等，不用修改，按模板默认的就行-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{% block title %}base{% endblock %}</title>  <!--通过模板设置title动态加载-->
+
+    <!-- Bootstrap  将放入static下对应的内容加载进来，导入bootstrap样式文件，通过模板设置动态加载-->
+    <link href="{% static '/bootstrap-3.3.7-dist/css/bootstrap.css' %}" rel="stylesheet">
+    {%  block css %}{% endblock %} <!--通过模板设置css动态加载-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]><!--用于支持ie9以下的版本支持h5,按alt+enter点击下载即可-->
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+      <!--  导入jquery插件,通过模板设置动态加载 -->
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <!--  导入bootstrap的js文件,通过模板设置动态加载-->
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">主页</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.session.is_login %}   <!--views.py文件中登陆成功后赋值未True，这里拿到True后就进入判断语句-->
+                <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>   <!--这里显示的是views文件中输入的username，也就是当前登陆成功的用户名-->
+                <li><a href="/logout/">登出</a></li>      <!--导航条点击登出跳转至登出页面-->
+            {% else %}   <!--如果登陆成功就不会执行下面的代码，避免出现登陆成功后依然显示注册登陆的情况,另外登出或未登陆时访问网页才会出现下面的内容-->
+            <li><a href="/register/"><span class="glyphicon glyphicon-user"></span> 注册</a></li>      <!--导航条点击注册跳转至注册页面-->
+            <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>   <!--导航条点击登陆跳转至登陆页面-->
+            {% endif %}
+        </ul>
+    </div>
+    </nav>
+  {% block content %}{% endblock %}  <!--为具体主体内容留下接口-->
+  </body>
+</html>

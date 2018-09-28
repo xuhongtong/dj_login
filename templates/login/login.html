@@ -1,0 +1,41 @@
+{% extends 'base.html' %}  <!--继承base网页模板内容,可以浏览网页查看效果-->
+{% load staticfiles %}   <!--载入静态方法，用于加载static中的文件-->
+{% block title %}登陆{%  endblock %}  <!--设置title，默认使用base模板中的-->
+{% block css %}<link href="{% static 'css/login.css'%}" rel="stylesheet" />{% endblock %} <!--使用自定义的css登陆样式，不用base中的-->
+
+{% block content %}   <!--该模板语言用于定义主体内容，和模板中的结合使用-->
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+          <form class='form-login' action="/login/" method="POST">
+              {% if message %}      <!--类似if语句-->
+                  <div class="alert alert-warning">{{ message }}</div>  <!--使用bootstrap的警示传递message信息-->
+              {% endif %}
+              {% csrf_token %}
+              <h2 class="text-center">欢迎登录</h2>
+                <div class="form-group">
+                  {{ login_form.username.label_tag }}
+                  {{ login_form.username}}
+                </div>
+                <div class="form-group">
+                  {{ login_form.password.label_tag }}
+                  {{ login_form.password }}
+                </div>
+                <div class="form-group">
+                    {{ login_form.captcha.errors }}   <!--当验证码输入不正确时显示-->
+                    {{ login_form.captcha.label_tag }}  <!--用于表示label的页面显示-->
+                    {{ login_form.captcha }}            <!--用于captcha的input标签显示-->
+                </div>
+{#              <div class="form-group">#}
+{#                <label for="id_username">用户名：</label>#}
+{#                <input type="text" name='username' class="form-control" id="id_username" placeholder="Username" autofocus required>#}
+{#              </div>#}
+{#              <div class="form-group">#}
+{#                <label for="id_password">密码：</label>#}
+{#                <input type="password" name='password' class="form-control" id="id_password" placeholder="Password" required>#}
+{#              </div>#}
+              <button type="reset" class="btn btn-default pull-left">重置</button>
+              <button type="submit" class="btn btn-primary pull-right">提交</button>
+          </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

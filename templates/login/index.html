@@ -1,0 +1,19 @@
+{% extends 'base.html' %}                  <!--加载base模板内容-->
+{%  block title %}主页{% endblock %}      <!--这里不使用base模板的，自定义title-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body>
+{%  block content %}
+    {%  if request.session.is_login %}   <!--这里判断登陆成功，就进入欢迎页面-->
+    <h1>你好，{{ request.session.user_name }}!欢迎回来</h1>
+    {% else %}          <!--未登陆就显示以下公开内容的页面-->
+    <h1>你尚未登陆，只能访问公开内容！</h1>
+    {% endif %}         <!--结束循环-->
+{% endblock %}
+</body>
+</html>
