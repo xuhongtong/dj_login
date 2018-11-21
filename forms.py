@@ -23,6 +23,6 @@ class RegisterForm(forms.Form):
     password2 = forms.CharField(label='密码', max_length=512,widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '密码'}))
     email=forms.EmailField(label='邮箱',widget=forms.EmailInput(attrs={'class':'form-control'}))
     sex=forms.ChoiceField(label='性别',choices=gender)
-    captcha=CaptchaField(label='验证码')
+    captcha = CaptchaField(label='验证码')
 
 

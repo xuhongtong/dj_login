@@ -8,9 +8,7 @@
               {% if message %}      <!--类似if语句-->
                   <div class="alert alert-warning">{{ message }}</div>  <!--使用bootstrap的警示传递message信息-->
               {% endif %}
-
               {% csrf_token %}
-
               <h2 class="text-center">欢迎注册</h2>
                 <div class="form-group">
                   {{ register_form.username.label_tag }}
@@ -32,12 +30,16 @@
                   {{ register_form.sex.label_tag }}
                   {{ register_form.sex }}
                 </div>
-                <div class="form-group">
-                    {{ register_form.captcha.errors }}   <!--当验证码输入不正确时显示-->
-                    {{ register_form.captcha.label_tag }}  <!--用于表示label的页面显示-->
-                    {{ register_form.captcha }}            <!--用于captcha的input标签显示-->
-                </div>
-
+{#                <div class="form-group">#}
+{#                    {{ register_form.captcha.error }}   <!--当验证码输入不正确时显示-->#}
+{#                    {{ register_form.captcha.label_tag }}  <!--用于表示label的页面显示-->#}
+{#                    {{ register_form.captcha }}            <!--用于captcha的input标签显示-->#}
+{#                </div>#}
+              <div class="form-group">
+                  {{ register_form.captcha.errors }}
+                  {{ register_form.captcha.label_tag }}
+                  {{ register_form.captcha }}
+              </div>
               <button type="reset" class="btn btn-default pull-left">重置</button>
               <button type="submit" class="btn btn-primary pull-right">提交</button>
           </form>

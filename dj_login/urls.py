@@ -21,7 +21,7 @@ import xadmin
 urlpatterns = [
     # path('admin/', admin.site.urls),
     url('xadmin/',xadmin.site.urls),
-    url(r'',include('app_login.urls')),
+    url(r'^',include('app_login.urls')),
     url(r'^captcha',include('captcha.urls'))
 ]
 

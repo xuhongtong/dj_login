@@ -83,9 +83,9 @@ WSGI_APPLICATION = 'dj_login.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Django_login',
+        'NAME': 'dj_login',
         'USER':'root',
-        'PASSWORD':'root',
+        'PASSWORD':'123456',
     }
 }
 
@@ -132,3 +132,14 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'   #指定邮件发送的后端模块
+EMAIL_HOST = 'smtp.163.com'     #邮箱smtp服务地址
+EMAIL_PORT = 25             #邮箱服务端口号
+EMAIL_HOST_USER = 'jingyetong@163.com'   #发送的邮箱账号
+EMAIL_HOST_PASSWORD = 'jinye123'     #发送的邮箱密码
+EMAIL_USE_TLS = True     #是否使用TLS安全设置
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER    #  默认发送用户
+CONFIRM_DAY=7         #有效时间
